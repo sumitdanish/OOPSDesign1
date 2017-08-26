@@ -1,8 +1,11 @@
 package com.test.graph;
 
+import com.test.mattrix.InplaceRotation;
+
 import java.io.File;
 import java.io.IOException;
 import java.util.*;
+import java.util.stream.Stream;
 
 public class TopologicalSorting {
     public static void main(String[] args) throws IOException{
@@ -13,20 +16,16 @@ public class TopologicalSorting {
             String[] s = line.split(",");
             g.addEadge(Integer.parseInt(s[0]),Integer.parseInt(s[1]));
         }
-        Node3 n = g.getGmap().get(5);
-        System.out.println(g.getIndegree().get(1));
-        while(n != null){
-            System.out.print(n.getData()+",");
-            n =n.getNext();
-        }
+        g.topological();
+       // System.out.println(g.getIndegree().get(5));
     }
 }
 
 class Graph3{
     private Map<Integer,Node3> gmap = new HashMap<>();
     private Set<Integer> isRoot = new HashSet<>();
-    private Set<Integer> isVisited = new HashSet<>();
-    private Stack<Integer> order = new Stack<>();
+    private Set<Integer> isVisited = new LinkedHashSet<>();
+
     private Map<Integer,Integer> indegree = new HashMap<>();
     public void addEadge(int src,int dest){
         Node3 n1 = null;
@@ -39,14 +38,41 @@ class Graph3{
         if(indegree.containsKey(dest)){
             ind += indegree.get(dest);
         }
+        if(!indegree.containsKey(src)){
+            indegree.put(src,0);
+        }
+
         indegree.put(dest,ind);
         n1 = gmap.get(src);
         n1 = createNode(n1,dest);
         gmap.put(src,n1);
     }
 
-    public void topological(int v){
-        isVisited.add(v);
+    public void topological(){
+        Queue<Integer> queue = new LinkedList<>();
+        for(Map.Entry m : this.indegree.entrySet()){
+            if(m.getValue() == null || (Integer)m.getValue() == 0){
+                queue.add((Integer) m.getKey());
+            }
+        }
+        while(!queue.isEmpty()){
+            int v = queue.poll();
+            isVisited.add(v);
+            Node3 n = this.getGmap().get(v);
+            while(n != null){
+                Integer ind = this.getIndegree().get(n.getData());
+                if( ind!= null || ind != 0){
+                    ind = ind -1;
+                    this.getIndegree().put(n.getData(),ind);
+                }
+                if(ind == 0){
+                    queue.add(n.getData());
+                }
+                n = n.getNext();
+            }
+        }
+
+        Stream.of(isVisited.toArray()).forEach(e -> System.out.print(e+","));
 
     }
 
