@@ -12,11 +12,12 @@ public class TopologicalSorting {
         Scanner sc = new Scanner(new File("topo.txt"));
         Graph3 g = new Graph3();
         String line = "";
+        int size = sc.nextInt();
         while(!(line=sc.next().toString().trim()).equals("#")){
             String[] s = line.split(",");
             g.addEadge(Integer.parseInt(s[0]),Integer.parseInt(s[1]));
         }
-        g.topological();
+        g.topological(size);
        // System.out.println(g.getIndegree().get(5));
     }
 }
@@ -48,13 +49,14 @@ class Graph3{
         gmap.put(src,n1);
     }
 
-    public void topological(){
+    public void topological(int size){
         Queue<Integer> queue = new LinkedList<>();
         for(Map.Entry m : this.indegree.entrySet()){
             if(m.getValue() == null || (Integer)m.getValue() == 0){
                 queue.add((Integer) m.getKey());
             }
         }
+        int cnt = 0;
         while(!queue.isEmpty()){
             int v = queue.poll();
             isVisited.add(v);
@@ -70,8 +72,12 @@ class Graph3{
                 }
                 n = n.getNext();
             }
+            cnt++;
         }
-
+        if(isVisited.size() != size){
+            System.out.println("No Topo !!!");
+            return;
+        }
         Stream.of(isVisited.toArray()).forEach(e -> System.out.print(e+","));
 
     }
