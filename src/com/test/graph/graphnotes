@@ -1,0 +1,4 @@
+Articulation point :
+    1. if any node have tow independent child then that node is articulation point
+                                OR
+    2. if any node have visited time is minimum from all adjacent node then that node is articulation point
