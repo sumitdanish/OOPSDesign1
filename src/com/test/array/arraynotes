@@ -5,3 +5,21 @@ http://www.geeksforgeeks.org/count-rotations-divisible-4/
 http://www.geeksforgeeks.org/rearrange-array-maximum-minimum-form-set-2-o1-extra-space/
 http://www.geeksforgeeks.org/maximize-sum-consecutive-differences-circular-array/
 http://www.geeksforgeeks.org/find-a-sorted-subsequence-of-size-3-in-linear-time/
+http://www.geeksforgeeks.org/find-a-sorted-subsequence-of-size-3-in-linear-time/
+http://www.geeksforgeeks.org/sorted-subsequence-size-3-linear-time-using-constant-space/
+http://www.geeksforgeeks.org/maximum-length-bitonic-subarray/
+
+
+Segemt tree :
+    Space complexity O(N)
+    Time complexity to buid the tree is O(N)
+    Query Time is O(logn)
+
+ To find the result in given index range there are three rule to search the element in given index range
+    1. Partial overlap(if interval of the node which is build in the tree is not inside) ->
+    if given index range is partial overlap then we have to search the element
+        in both the side of the tree
+    2. Complete overlap (if interval of the node which is build in the tree is inside with equality)->
+     if given index range if fully overlapped with any index range in the tree
+        then we will stop the searching  the element and return the result
+    3. No-Overlap -> same as complete overlaped
