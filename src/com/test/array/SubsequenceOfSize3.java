@@ -3,6 +3,19 @@ package com.test.array;
 public class SubsequenceOfSize3 {
     public static void main(String[] args) {
         int[] a = {4,3,2,1};
+        /*
+        * Test case :
+        * Input:  arr[] = {12, 11, 10, 5, 6, 2, 30}
+            Output: 5, 6, 30
+
+            Input:  arr[] = {1, 2, 3, 4}
+            Output: 1, 2, 3 OR 1, 2, 4 OR 2, 3, 4
+
+            Input:  arr[] = {4, 3, 2, 1}
+            Output: No such triplet
+        *
+        *
+        * */
         smallest(a);
     }
     private static void subsequence(int[] a){
