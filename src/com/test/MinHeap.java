@@ -65,12 +65,6 @@ class MinHeapImpl{
         int l = left(i);
         int r = right(i);
         int minIndex = 0;
-//        if(r > this.data[0]){
-//            minIndex = l;
-//        }
-//        else {
-//
-//        }
         minIndex = (data[l] < data[r]) ? l: r;
         if(data[i] < data[minIndex]){
             return;
