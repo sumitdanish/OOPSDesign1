@@ -2,7 +2,7 @@ package com.test.array;
 
 public class NextGreaterPalindrome {
     public static void main(String[] args) {
-        int num = 12;
+        int num = 10;
         int len = (String.valueOf(num).length());
         //System.out.println(num/10);
         number(num,len);
@@ -17,6 +17,7 @@ public class NextGreaterPalindrome {
         int rev = reverse(sum1);
         int res = (int) (sum1*(Math.pow(10,(len/2))) + rev);
         if(res > number){
+            System.out.println(res);
             return;//res;
         }else{
             sum2 = (int) (number%Math.pow(10,len/2));
